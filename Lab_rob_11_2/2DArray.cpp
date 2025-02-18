@@ -1,6 +1,27 @@
 #include "2DArray.h"
 
-int** create(int r, int c) {
+bool IsNullPtr(const int** arr) {
+	if (!arr) {
+		cout << "Масив не правильно передано." << endl;
+		return true;
+	}
+	return false;
+}
+
+void Num(int& num) {
+	
+	do {
+		cin >> num;
+
+		if (num <= 0)
+			cout << "Розмiри задано не правельно." << endl;
+
+	} while (num <= 0);
+}
+
+int** create(int &r, int &c) {
+
+	cout << "Введіть значення кількості для рядків та стовпців: "; Num(r); Num(c);
 
 	int** arr = new int* [r];
 
@@ -13,6 +34,8 @@ int** create(int r, int c) {
 
 void inic(int** arr, int r, int c) {
 	int ans;
+
+	if (IsNullPtr(arr))return;
 
 	cout << "Виберiть спосiб заповнення масиву (0 - вручну, iнше значення - rand): " << endl;
 	cin >> ans;
@@ -34,6 +57,8 @@ void inic(int** arr, int r, int c) {
 
 void show(const int** arr, int r, int c) {
 
+	if (IsNullPtr(arr)) return;
+
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++)
 			cout << *(*(arr + i) + j) << " ";;
@@ -43,16 +68,23 @@ void show(const int** arr, int r, int c) {
 
 }
 
-void clear(int** arr, int r) {
+void clear(int**& arr, int r) {
+
+	if (IsNullPtr(arr)) return;
 
 	for (int i = 0; i < r; i++)
 		delete[] arr[i];
 
 	delete[] arr;
 
+	arr = nullptr;
+
 }
 
 int min(const int** arr, int r, int c) {
+
+	if (IsNullPtr(arr)) return 0;
+
 	int min = **arr;
 
 	for (int i = 0; i < r; i++)
@@ -65,6 +97,9 @@ int min(const int** arr, int r, int c) {
 }
 
 int max(const int** arr, int r, int c) {
+	
+	if (IsNullPtr(arr)) return 0;
+
 	int max = arr[0][0];
 
 	for (int i = 0; i < r; i++)
@@ -77,6 +112,9 @@ int max(const int** arr, int r, int c) {
 }
 
 double average(const int** arr, int r, int c) {
+
+	if (IsNullPtr(arr)) return 0;
+
 	double s = 0;
 
 	for (int i = 0; i < r; i++)
@@ -88,6 +126,9 @@ double average(const int** arr, int r, int c) {
 }
 
 int* arrNew(const int** arr, int r, int c) {
+
+	if (IsNullPtr(arr)) return nullptr;
+
 	int k = 0;
 
 	for (int i = 0; i < r; i++)
@@ -124,14 +165,14 @@ void showJArr(const int** arr, int c, int* ind) {
 	}
 }
 
-int** Dod(const int** arr, int r, int c, int* cInColumn) {
+int** Dod(const int** arr, int r, int c) {
 	int** arrD = new int* [c];
-	int* cInColum = new int[c];
+	int* cInColumn = new int[c];
 	int cnt = 0;
 
 	for (int j = 0; j < c; j++) {
 		int a = 0;
-		*(cInColum + j) = 0;
+		*(cInColumn + j) = 0;
 		
 		for (int i = 0; i < r; i++) 
 			if (*(*(arr + i) + j) > 0) {

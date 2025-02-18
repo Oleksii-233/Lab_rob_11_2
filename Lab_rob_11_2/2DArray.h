@@ -9,6 +9,8 @@
 
 using namespace std;
 
+bool IsNullPtr(int** arr);
+
 int** create(int r, int c);
 
 void inic(int** arr, int r, int c);
@@ -24,6 +26,8 @@ int max(const int** arr, int r, int c);
 double average(const int** arr, int r, int c);
 
 int* arrNew(const int** arr, int r, int c);
+
+void showJArr(const int** arr, int c, int* ind);
 
 int** Dod(const int** arr, int r, int c);
 
