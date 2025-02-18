@@ -9,26 +9,24 @@
 
 using namespace std;
 
-bool IsNullPtr(int** arr);
-
-int** create(int r, int c);
+int** create(int &r, int &c);
 
 void inic(int** arr, int r, int c);
 
 void show(const int** arr, int r, int c);
 
-void clear(int** arr, int r);
+int Min(const int** arr, int r, int c);
 
-int min(const int** arr, int r, int c);
-
-int max(const int** arr, int r, int c);
+int Max(const int** arr, int r, int c);
 
 double average(const int** arr, int r, int c);
 
 int* arrNew(const int** arr, int r, int c);
 
-void showJArr(const int** arr, int c, int* ind);
-
 int** Dod(const int** arr, int r, int c);
+
+void clear(int**& arr, int r);
+
+void clear(int**& arr);
 
 #endif 

@@ -81,7 +81,17 @@ void clear(int**& arr, int r) {
 
 }
 
-int min(const int** arr, int r, int c) {
+void clear(int**& arr) {
+
+	if (IsNullPtr(arr)) return;
+
+	delete[] arr;
+
+	arr = nullptr;
+
+}
+
+int Min(const int** arr, int r, int c) {
 
 	if (IsNullPtr(arr)) return 0;
 
@@ -96,7 +106,7 @@ int min(const int** arr, int r, int c) {
 
 }
 
-int max(const int** arr, int r, int c) {
+int Max(const int** arr, int r, int c) {
 	
 	if (IsNullPtr(arr)) return 0;
 
