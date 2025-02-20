@@ -29,6 +29,4 @@ int** Dod(int** arr, int r, int c);
 
 void clearArrays(int**& arr,  int r, int*& arrN, int**& arrD, int c);
 
-void showJArr(int** arr, int c, int* ind);
-
 #endif 
