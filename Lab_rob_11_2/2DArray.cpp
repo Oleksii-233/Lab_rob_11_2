@@ -75,11 +75,12 @@ void show(int** arr, int r, int c) {
 		cout << endl;
 	}
 
+
 }
 
 void show(int* arr, int r) {
 
-	if (!IsNullPtr(arr))return;
+	if (IsNullPtr(arr))return;
 
 	for (int i = 0; i < r; i++) 
 			cout << setw(5) << *(arr + i) << " ";;
@@ -184,12 +185,16 @@ int* arrNew(int** arr, int r, int c, int& k) {
 }
 
 void showJArr(int** arr, int c, int* ind) {
-
+	int k = 0;
 
 	for (int i = 0; i < c; i++) {
-		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери:";
-		for (int j = 0; j < ind[i]; j += 2)
+		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери: ";
+		for (int j = 0; j < ind[i]; j += 2) {
 			cout << setw(3) << arr[i][j] << "(" << arr[i][j] + 1 << ")" << " ";
+			k++;
+		}
+		if (!k)
+			cout << "незнайденi.";
 		cout << endl;
 	}
 }
