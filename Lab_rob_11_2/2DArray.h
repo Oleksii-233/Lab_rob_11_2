@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <ctime>;
+#include <ctime>
 
 using namespace std;
 
@@ -13,20 +13,22 @@ int** create(int &r, int &c);
 
 void inic(int** arr, int r, int c);
 
-void show(const int** arr, int r, int c);
+void show(int** arr, int r, int c);
 
-int Min(const int** arr, int r, int c);
+void show(int* arr, int r);
 
-int Max(const int** arr, int r, int c);
+int Min(int** arr, int r, int c);
 
-double average(const int** arr, int r, int c);
+int Max(int** arr, int r, int c);
 
-int* arrNew(const int** arr, int r, int c);
+double average(int** arr, int r, int c);
 
-int** Dod(const int** arr, int r, int c);
+int* arrNew(int** arr, int r, int c, int &k);
 
-void clear(int**& arr, int r);
+int** Dod(int** arr, int r, int c);
 
-void clear(int**& arr);
+void clearArrays(int**& arr,  int r, int*& arrN, int**& arrD, int c);
+
+void showJArr(int** arr, int c, int* ind);
 
 #endif 

@@ -1,11 +1,20 @@
 #include "2DArray.h"
 
-bool IsNullPtr(const int** arr) {
+bool IsNullPtr(int** arr) {
 	if (!arr) {
 		cout << "Масив не правильно передано." << endl;
 		return true;
 	}
 	return false;
+}
+
+bool IsNullPtr(const int* arr) {
+	if (!arr)
+	
+		return true;
+
+	return false;
+
 }
 
 void Num(int& num) {
@@ -21,7 +30,7 @@ void Num(int& num) {
 
 int** create(int &r, int &c) {
 
-	cout << "Введіть значення кількості для рядків та стовпців: "; Num(r); Num(c);
+	cout << "Введiть значення кiлькостi для рядкiв та стовпцiв: "; Num(r); Num(c);
 
 	int** arr = new int* [r];
 
@@ -35,7 +44,7 @@ int** create(int &r, int &c) {
 void inic(int** arr, int r, int c) {
 	int ans;
 
-	if (IsNullPtr(arr))return;
+	if (IsNullPtr(arr));
 
 	cout << "Виберiть спосiб заповнення масиву (0 - вручну, iнше значення - rand): " << endl;
 	cin >> ans;
@@ -55,16 +64,27 @@ void inic(int** arr, int r, int c) {
 
 }
 
-void show(const int** arr, int r, int c) {
+void show(int** arr, int r, int c) {
 
 	if (IsNullPtr(arr)) return;
 
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++)
-			cout << *(*(arr + i) + j) << " ";;
+			cout << setw(5) << *(*(arr + i) + j) << " ";;
 
 		cout << endl;
 	}
+
+}
+
+void show(int* arr, int r) {
+
+	if (!IsNullPtr(arr))return;
+
+	for (int i = 0; i < r; i++) 
+			cout << setw(5) << *(arr + i) << " ";;
+
+	cout << endl;
 
 }
 
@@ -81,7 +101,7 @@ void clear(int**& arr, int r) {
 
 }
 
-void clear(int**& arr) {
+void clear(int*& arr) {
 
 	if (IsNullPtr(arr)) return;
 
@@ -91,7 +111,7 @@ void clear(int**& arr) {
 
 }
 
-int Min(const int** arr, int r, int c) {
+int Min(int** arr, int r, int c) {
 
 	if (IsNullPtr(arr)) return 0;
 
@@ -106,7 +126,7 @@ int Min(const int** arr, int r, int c) {
 
 }
 
-int Max(const int** arr, int r, int c) {
+int Max(int** arr, int r, int c) {
 	
 	if (IsNullPtr(arr)) return 0;
 
@@ -121,7 +141,7 @@ int Max(const int** arr, int r, int c) {
 
 }
 
-double average(const int** arr, int r, int c) {
+double average(int** arr, int r, int c) {
 
 	if (IsNullPtr(arr)) return 0;
 
@@ -135,11 +155,11 @@ double average(const int** arr, int r, int c) {
 
 }
 
-int* arrNew(const int** arr, int r, int c) {
+int* arrNew(int** arr, int r, int c, int& k) {
 
 	if (IsNullPtr(arr)) return nullptr;
 
-	int k = 0;
+	k = 0;
 
 	for (int i = 0; i < r; i++)
 		for (int j = 0; j < c; j++)
@@ -163,19 +183,18 @@ int* arrNew(const int** arr, int r, int c) {
 
 }
 
-void showJArr(const int** arr, int c, int* ind) {
-	
-	cout << setw(10) << "Значення" << setw(15) << "Порядковий номер" << endl;
+void showJArr(int** arr, int c, int* ind) {
+
 
 	for (int i = 0; i < c; i++) {
-		for (int j = 0; j < ind[i]; j+=2) 
-			cout << setw(10) << arr[i][j] << setw(15) << arr[i][j + 1] + 1;
-		
+		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери:";
+		for (int j = 0; j < ind[i]; j += 2)
+			cout << setw(3) << arr[i][j] << "(" << arr[i][j] + 1 << ")" << " ";
 		cout << endl;
 	}
 }
 
-int** Dod(const int** arr, int r, int c) {
+int** Dod(int** arr, int r, int c) {
 	int** arrD = new int* [c];
 	int* cInColumn = new int[c];
 	int cnt = 0;
@@ -208,5 +227,25 @@ int** Dod(const int** arr, int r, int c) {
 	showJArr(arrD, c, cInColumn);
 
 	return arrD;
+
+}
+
+void clearArrays(int**& arr, int r, int*& arrN, int**& arrD, int c) {
+
+	if (arr) {
+		clear(arr, r);
+		cout << "Пам'ять звiльнена iз користувацького масиву." << endl;
+
+	}
+	if (arrN) {
+		clear(arrN);
+		cout << "Пам'ять звiльнена iз масиву негативних елементiв." << endl;
+
+	}
+	if (arrD) {
+		clear(arrD, c);
+		cout << "Пам'ять звiльнена iз масиву додатнiх елементiв у ствопцi" << endl;
+
+	}
 
 }
