@@ -64,7 +64,7 @@ void inic(int** arr, int r, int c) {
 
 }
 
-void show(int** arr, int r, int c) {
+void show(int** arr, int r, int c) {			
 
 	if (IsNullPtr(arr)) return;
 
@@ -190,7 +190,7 @@ void showJArr(int** arr, int c, int* ind) {
 	for (int i = 0; i < c; i++) {
 		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери: ";
 		for (int j = 0; j < ind[i]; j += 2) {
-			cout << setw(3) << arr[i][j] << "(" << arr[i][j] + 1 << ")" << " ";
+			cout << setw(3) << arr[i][j] << "(" << arr[i][j + 1] + 1 << ")" << " ";
 			k++;
 		}
 		if (!k)
@@ -199,7 +199,10 @@ void showJArr(int** arr, int c, int* ind) {
 	}
 }
 
-int** Dod(int** arr, int r, int c) {
+int** Vid(int** arr, int r, int c) {
+	
+	if (IsNullPtr(arr))return nullptr;
+	
 	int** arrD = new int* [c];
 	int* cInColumn = new int[c];
 	int cnt = 0;
@@ -209,7 +212,7 @@ int** Dod(int** arr, int r, int c) {
 		*(cInColumn + j) = 0;
 		
 		for (int i = 0; i < r; i++) 
-			if (*(*(arr + i) + j) > 0) {
+			if (*(*(arr + i) + j) < 0) {
 				*(cInColumn + j) += 2;
 				cnt++;
 			}
@@ -217,13 +220,13 @@ int** Dod(int** arr, int r, int c) {
 		*(arrD + j) = new int[*(cInColumn + j)];
 
 		for (int i = 0; i < r; i++)
-			if (*(*(arr + i) + j) > 0) {
+			if (*(*(arr + i) + j) < 0) {
 				*(*(arrD + j) + a++) = *(*(arr + i) + j);
 				*(*(arrD + j) + a++) = i;
 			}
 	}
 	if (!cnt) {
-		cout << "Додатнi елементи вiдсутнi у масивовi." << endl;
+		cout << "Вiд'ємнi елементи вiдсутнi у масивовi." << endl;
 		return nullptr;
 	}
 

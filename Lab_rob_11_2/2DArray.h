@@ -25,7 +25,7 @@ double average(int** arr, int r, int c);
 
 int* arrNew(int** arr, int r, int c, int &k);
 
-int** Dod(int** arr, int r, int c);
+int** Vid(int** arr, int r, int c);
 
 void clearArrays(int**& arr,  int r, int*& arrN, int**& arrD, int c);
 
