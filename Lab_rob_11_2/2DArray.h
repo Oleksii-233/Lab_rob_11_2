@@ -17,6 +17,8 @@ void show(int** arr, int r, int c);
 
 void show(int* arr, int r);
 
+void showNumInd(int** arr, int r, int c);
+
 int Min(int** arr, int r, int c);
 
 int Max(int** arr, int r, int c);
@@ -25,7 +27,7 @@ double average(int** arr, int r, int c);
 
 int* arrNew(int** arr, int r, int c, int &k);
 
-int** Dod(int** arr, int r, int c);
+int** Dod(int** arr, int r, int c, int& row);
 
 void clearArrays(int**& arr,  int r, int*& arrN, int**& arrD, int c);
 

@@ -2,8 +2,7 @@
 
 int main() {
 	setlocale(0, "UKR");
-	int** arr = nullptr, * arrN = nullptr, ** arrD = nullptr, r = 0, c = 0, ans, k;
-
+	int** arr = nullptr, * arrN = nullptr, ** arrD = nullptr, r = 0, c = 0, ans, k, row;
 	do {
 		cout << "Виберiть, що бажаєте зробити:\n0 - створення та заповнення двовимiрного динамiчного масиву." << endl;
 		cout << "1 - виведення двовимiрного масиву." << endl;
@@ -40,7 +39,8 @@ int main() {
 			show(arrN, k);
 		}break;
 		case 6: {
-			arrD = Dod(arr, r, c);
+			arrD = Dod(arr, r, c, row);
+			showNumInd(arrD, row, 3);
 		}break;
 		case 7: {
 			clearArrays(arr, r, arrN, arrD, c);

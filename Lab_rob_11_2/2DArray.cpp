@@ -89,6 +89,24 @@ void show(int* arr, int r) {
 
 }
 
+void showNumInd(int** arr, int r, int c) {
+
+	if (!r) {
+		cout << "Елементи вiдсутнi." << endl;
+		return;
+	}
+
+	cout << "Додатнi елементи масиву: " << endl;
+	cout << setw(10) << "Значення " << setw(10) << "Рядок" << setw(10) << "Стовпець" << endl;
+
+	for (int i = 0; i < r; i++) {
+		for (int j = 0; j < 3; j++)
+			cout << setw(10) << arr[i][j];
+		cout << endl;
+	}
+
+}
+
 void clear(int**& arr, int r) {
 
 	if (IsNullPtr(arr)) return;
@@ -184,55 +202,35 @@ int* arrNew(int** arr, int r, int c, int& k) {
 
 }
 
-void showJArr(int** arr, int c, int* ind) {
-	int k = 0;
+int** Dod(int** arr, int r, int c, int& row) {
+	row = 0;
 
-	for (int i = 0; i < c; i++) {
-		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери: ";
-		for (int j = 0; j < ind[i]; j += 2) {
-			cout << setw(3) << arr[i][j] << "(" << arr[i][j] + 1 << ")" << " ";
-			k++;
-		}
-		if (!k)
-			cout << "незнайденi.";
-		cout << endl;
-	}
-}
+	for (int i = 0; i < r; i++)
+		for (int j = 0; j < c; j++)
+			if (*(*(arr + i) + j) > 0)
+				row++;
 
-int** Dod(int** arr, int r, int c) {
-	int** arrD = new int* [c];
-	int* cInColumn = new int[c];
-	int cnt = 0;
+	if (!row) return nullptr;
 
-	for (int j = 0; j < c; j++) {
-		int a = 0;
-		*(cInColumn + j) = 0;
-		
-		for (int i = 0; i < r; i++) 
+	int** dod = new int* [row];
+
+	for (int i = 0; i < row; i++)
+		*(dod + i) = new int[3];
+
+	int a = 0;
+	for (int i = 0; i < r; i++) {
+		for (int j = 0; j < c; j++)
 			if (*(*(arr + i) + j) > 0) {
-				*(cInColumn + j) += 2;
-				cnt++;
+				int b = 0;
+				*(*(dod + a) + b++) = *(*(arr + i) + j);
+				*(*(dod + a) + b++) = i;
+				*(*(dod + a) + b) = j;
+				a++;
 			}
 
-		*(arrD + j) = new int[*(cInColumn + j)];
-
-		for (int i = 0; i < r; i++)
-			if (*(*(arr + i) + j) > 0) {
-				*(*(arrD + j) + a++) = *(*(arr + i) + j);
-				*(*(arrD + j) + a++) = i;
-			}
-	}
-	if (!cnt) {
-		cout << "Додатнi елементи вiдсутнi у масивовi." << endl;
-		return nullptr;
 	}
 
-	cout << "Вмiст двовимiрного масиву: " << endl;
-
-	showJArr(arrD, c, cInColumn);
-
-	return arrD;
-
+	return dod;
 }
 
 void clearArrays(int**& arr, int r, int*& arrN, int**& arrD, int c) {
