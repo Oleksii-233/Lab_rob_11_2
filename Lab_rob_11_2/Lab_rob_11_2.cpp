@@ -49,6 +49,10 @@ int main() {
 		}break;
 		case 5: {
 			arrN = arrNew(arr, r, c, k); // k - кількість від'ємних елементів для виведення в головній програмі
+
+			if (!k)
+				cout << "Вiйд'ємнi елементи у масивовi вiдсутнi, масив вiд'ємних елементiв порожнiй." << endl;
+
 		}break;
 		case 6: {
 			arrD = Dod(arr, r, c,arrInd);

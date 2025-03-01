@@ -39,7 +39,7 @@ double average(int** arr, int r, int c); // Середня значення елементів масиву
 
 int* arrNew(int** arr, int r, int c, int &k); // Створення нового одновимірного масиву, що буде містити від'ємні елементи користувацького
 
-int** Dod(int** arr, int r, int c, int* cInColumn); // Створення масиву, що буде містити додатні елементи у стовпці
+int** Dod(int** arr, int r, int c, int*& cInColumn); // Створення масиву, що буде містити додатні елементи у стовпці
 
 void showJArr(int** arr, int c, int* ind); // Виведення для додатніх елементів у стовпці
 

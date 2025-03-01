@@ -9,10 +9,11 @@ bool IsNullPtr(int** arr) {
 }
 
 bool IsNullPtr(int* arr) {
-	if (!arr)
-	
-		return true;
+	if (!arr) {
 
+		cout << "Не правильно передано масив." << endl;
+		return true;
+	}
 	return false;
 
 }
@@ -127,7 +128,7 @@ void clearArrays(int**& arr, int r, int*& arrN, int**& arrD, int c, int* arrInd)
 	}
 	if (arrInd) {
 		clear(arrInd);
-		cout << "Пам'ять звiльнена із масиву для збереження індексів" << endl;
+		cout << "Пам'ять звiльнена iз масиву для збереження iндексiв" << endl;
 
 	}
 
@@ -210,12 +211,14 @@ int* arrNew(int** arr, int r, int c, int& k) {
 }
 
 void showJArr(int** arr, int c, int* ind) {
-	int k = 0;
+
+	if (IsNullPtr(arr))return;
 
 	for (int i = 0; i < c; i++) {
+		int k = 0;
 		cout << "Позитивнi елементи у " << i + 1 << " стовпцi та їх порядковi номери: ";
-		for (int j = 0; j < ind[i]; j += 2) {
-			cout << setw(3) << arr[i][j] << "(" << arr[i][j] + 1 << ")" << " ";
+		for (int j = 0; j < *(ind + i); j += 2) {
+			cout << setw(3) << *(*(arr + i) + j) << "(" << *(*(arr + i) + j + 1) + 1 << ")" << " ";
 			k++;
 		}
 		if (!k)
@@ -224,7 +227,7 @@ void showJArr(int** arr, int c, int* ind) {
 	}
 }
 
-int** Dod(int** arr, int r, int c, int* cInColumn) {
+int** Dod(int** arr, int r, int c, int*& cInColumn) {
 
 	if (IsNullPtr(arr)) return nullptr;
 
