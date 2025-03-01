@@ -8,7 +8,7 @@ bool IsNullPtr(int** arr) {
 	return false;
 }
 
-bool IsNullPtr(const int* arr) {
+bool IsNullPtr(int* arr) {
 	if (!arr)
 	
 		return true;
@@ -28,9 +28,10 @@ void Num(int& num) {
 	} while (num <= 0);
 }
 
-int** create(int &r, int &c) {
 
-	cout << "Введiть значення кiлькостi для рядкiв та стовпцiв: "; Num(r); Num(c);
+
+
+int** create(int r, int c) {
 
 	int** arr = new int* [r];
 
@@ -54,7 +55,6 @@ void inic(int** arr, int r, int c) {
 			for (int j = 0; j < c; j++)
 				cin >> arr[i][j];
 	else {
-		srand(time(nullptr));
 
 		for (int i = 0; i < r; i++)
 			for (int j = 0; j < c; j++)
@@ -70,7 +70,7 @@ void show(int** arr, int r, int c) {
 
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++)
-			cout << setw(5) << *(*(arr + i) + j) << " ";;
+			cout << setw(5) << *(*(arr + i) + j) << " ";
 
 		cout << endl;
 	}
@@ -91,8 +91,6 @@ void show(int* arr, int r) {
 
 void clear(int**& arr, int r) {
 
-	if (IsNullPtr(arr)) return;
-
 	for (int i = 0; i < r; i++)
 		delete[] arr[i];
 
@@ -104,13 +102,39 @@ void clear(int**& arr, int r) {
 
 void clear(int*& arr) {
 
-	if (IsNullPtr(arr)) return;
-
 	delete[] arr;
 
 	arr = nullptr;
 
 }
+
+void clearArrays(int**& arr, int r, int*& arrN, int**& arrD, int c, int* arrInd) {
+
+	if (arr) {
+		clear(arr, r);
+		cout << "Пам'ять звiльнена iз користувацького масиву." << endl;
+
+	}
+	if (arrN) {
+		clear(arrN);
+		cout << "Пам'ять звiльнена iз масиву негативних елементiв." << endl;
+
+	}
+	if (arrD) {
+		clear(arrD, c);
+		cout << "Пам'ять звiльнена iз масиву додатнiх елементiв у ствопцi" << endl;
+
+	}
+	if (arrInd) {
+		clear(arrInd);
+		cout << "Пам'ять звiльнена із масиву для збереження індексів" << endl;
+
+	}
+
+}
+
+
+
 
 int Min(int** arr, int r, int c) {
 
@@ -156,6 +180,9 @@ double average(int** arr, int r, int c) {
 
 }
 
+
+
+
 int* arrNew(int** arr, int r, int c, int& k) {
 
 	if (IsNullPtr(arr)) return nullptr;
@@ -167,10 +194,8 @@ int* arrNew(int** arr, int r, int c, int& k) {
 			if (arr[i][j] < 0)
 				k++;
 
-	if (!k) {
-		cout << "Вiд'ємнi елементи у масивовi вiдстунi." << endl;
+	if (!k) 
 		return nullptr;
-	}
 
 	int* arrN = new int[k];
 	k = 0;
@@ -199,21 +224,23 @@ void showJArr(int** arr, int c, int* ind) {
 	}
 }
 
-int** Dod(int** arr, int r, int c) {
+int** Dod(int** arr, int r, int c, int* cInColumn) {
+
+	if (IsNullPtr(arr)) return nullptr;
+
 	int** arrD = new int* [c];
-	int* cInColumn = new int[c];
-	int cnt = 0;
+	cInColumn = new int[c];
 
 	for (int j = 0; j < c; j++) {
+
 		int a = 0;
 		*(cInColumn + j) = 0;
 		
 		for (int i = 0; i < r; i++) 
-			if (*(*(arr + i) + j) > 0) {
-				*(cInColumn + j) += 2;
-				cnt++;
-			}
-
+			if (*(*(arr + i) + j) > 0) 
+				*(cInColumn + j) += 2; 
+		
+				
 		*(arrD + j) = new int[*(cInColumn + j)];
 
 		for (int i = 0; i < r; i++)
@@ -222,35 +249,8 @@ int** Dod(int** arr, int r, int c) {
 				*(*(arrD + j) + a++) = i;
 			}
 	}
-	if (!cnt) {
-		cout << "Додатнi елементи вiдсутнi у масивовi." << endl;
-		return nullptr;
-	}
-
-	cout << "Вмiст двовимiрного масиву: " << endl;
-
-	showJArr(arrD, c, cInColumn);
 
 	return arrD;
 
 }
 
-void clearArrays(int**& arr, int r, int*& arrN, int**& arrD, int c) {
-
-	if (arr) {
-		clear(arr, r);
-		cout << "Пам'ять звiльнена iз користувацького масиву." << endl;
-
-	}
-	if (arrN) {
-		clear(arrN);
-		cout << "Пам'ять звiльнена iз масиву негативних елементiв." << endl;
-
-	}
-	if (arrD) {
-		clear(arrD, c);
-		cout << "Пам'ять звiльнена iз масиву додатнiх елементiв у ствопцi" << endl;
-
-	}
-
-}
